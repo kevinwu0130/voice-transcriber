@@ -1,0 +1,251 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-active: #005ec2;
+  --danger: #ff3b30;
+  --text: #1d1d1f;
+  --text2: #6e6e73;
+  --border: #d2d2d7;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px 64px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+header h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; }
+header p  { color: var(--text2); margin-top: 6px; font-size: 0.95rem; }
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  width: 100%;
+  max-width: 720px;
+  overflow: hidden;
+}
+
+/* Tab bar */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+.tab-btn {
+  flex: 1;
+  padding: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text2);
+  transition: color .15s, background .15s;
+}
+.tab-btn:hover   { background: #f5f5f7; }
+.tab-btn.active  { color: var(--accent); border-bottom: 2px solid var(--accent); }
+
+/* Panels */
+.panel { display: none; padding: 28px; }
+.panel.active { display: block; }
+
+/* Section label */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text2);
+  margin-bottom: 10px;
+}
+
+/* Language selector */
+.lang-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.lang-btn {
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text2);
+  transition: all .15s;
+}
+.lang-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #e8f0fb;
+}
+
+/* Record button */
+.record-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 24px; }
+.record-btn {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform .1s, background .15s, box-shadow .15s;
+  box-shadow: 0 4px 14px rgba(0,113,227,.35);
+  display: flex; align-items: center; justify-content: center;
+}
+.record-btn:hover   { background: var(--accent-hover); }
+.record-btn:active  { transform: scale(.95); }
+.record-btn.recording {
+  background: var(--danger);
+  box-shadow: 0 4px 14px rgba(255,59,48,.4);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 4px 14px rgba(255,59,48,.4); }
+  50%      { box-shadow: 0 4px 24px rgba(255,59,48,.7); }
+}
+.record-status { font-size: 0.88rem; color: var(--text2); }
+
+/* Drop zone */
+.drop-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  margin-bottom: 16px;
+}
+.drop-zone:hover, .drop-zone.drag-over {
+  border-color: var(--accent);
+  background: #f0f6ff;
+}
+.drop-zone .icon { font-size: 2.5rem; margin-bottom: 8px; }
+.drop-zone p     { color: var(--text2); font-size: 0.9rem; }
+.drop-zone p strong { color: var(--accent); }
+#file-input { display: none; }
+
+/* Model row */
+.model-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.model-row .section-label { margin-bottom: 0; white-space: nowrap; }
+.model-btn {
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: none;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--text2);
+  transition: all .15s;
+}
+.model-btn.active { border-color: var(--accent); color: var(--accent); background: #e8f0fb; }
+
+/* Progress bar */
+.progress-wrap { margin-bottom: 16px; display: none; }
+.progress-wrap.visible { display: block; }
+.progress-label { font-size: 0.82rem; color: var(--text2); margin-bottom: 6px; }
+.progress-bar-bg {
+  background: var(--border);
+  border-radius: 99px;
+  height: 6px;
+  overflow: hidden;
+}
+.progress-bar {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--accent);
+  transition: width .2s;
+  width: 0%;
+}
+
+/* Transcribe button */
+.transcribe-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+  margin-bottom: 20px;
+}
+.transcribe-btn:hover    { background: var(--accent-hover); }
+.transcribe-btn:disabled { background: var(--border); color: var(--text2); cursor: not-allowed; }
+
+/* Result area */
+.result-label {
+  font-size: 0.82rem;
+  color: var(--text2);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.result-box {
+  background: #f9f9fb;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  min-height: 120px;
+  max-height: 300px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.result-box.placeholder { color: var(--text2); font-style: italic; }
+
+/* Action row */
+.action-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.action-btn {
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: none;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--text);
+  transition: background .12s, border-color .12s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.action-btn:hover { background: #f5f5f7; border-color: #999; }
+.action-btn.success { border-color: #34c759; color: #34c759; }
+
+/* Interim text (live) */
+.interim { color: var(--text2); font-style: italic; }

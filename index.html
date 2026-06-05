@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>聲音轉文字</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <header>
+    <h1>🎙 聲音轉文字</h1>
+    <p>即時錄音轉錄 · 音訊檔案轉錄 · 離線免費</p>
+  </header>
+
+  <div class="card">
+    <!-- Tab bar -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="live">🎤 即時錄音</button>
+      <button class="tab-btn" data-tab="file">📁 音訊檔案</button>
+    </div>
+
+    <!-- Live recording panel -->
+    <div class="panel active" id="panel-live">
+      <p class="section-label">語言</p>
+      <div class="lang-row" id="live-lang-row">
+        <button class="lang-btn active" data-lang="zh-TW">繁體中文</button>
+        <button class="lang-btn" data-lang="zh-CN">簡體中文</button>
+        <button class="lang-btn" data-lang="en-US">English</button>
+        <button class="lang-btn" data-lang="ja-JP">日本語</button>
+      </div>
+
+      <div class="record-wrap">
+        <button class="record-btn" id="record-btn" title="按下開始錄音">🎤</button>
+        <span class="record-status" id="record-status">按下麥克風開始錄音</span>
+      </div>
+
+      <div class="result-label">
+        <span>轉錄結果</span>
+        <span id="live-char-count" style="color:var(--text2);font-size:.8rem"></span>
+      </div>
+      <div class="result-box placeholder" id="live-result">等待錄音…</div>
+      <div class="action-row">
+        <button class="action-btn" id="live-copy">📋 複製</button>
+        <button class="action-btn" id="live-save">💾 儲存 .txt</button>
+        <button class="action-btn" id="live-clear">🗑 清除</button>
+      </div>
+    </div>
+
+    <!-- File transcription panel -->
+    <div class="panel" id="panel-file">
+      <div class="drop-zone" id="drop-zone">
+        <div class="icon">🎵</div>
+        <p><strong>點擊或拖放</strong>音訊檔案到這裡</p>
+        <p style="margin-top:6px;font-size:.8rem">支援 MP3、M4A、WAV、OGG、FLAC、WebM</p>
+        <input type="file" id="file-input" accept="audio/*" />
+      </div>
+      <div id="file-name" style="font-size:.85rem;color:var(--text2);margin-bottom:12px;display:none"></div>
+
+      <div class="model-row">
+        <span class="section-label">Whisper 模型</span>
+        <button class="model-btn active" data-model="Xenova/whisper-tiny">Tiny（快速 ~150MB）</button>
+        <button class="model-btn" data-model="Xenova/whisper-base">Base（較準 ~290MB）</button>
+      </div>
+
+      <p class="section-label">語言</p>
+      <div class="lang-row" id="file-lang-row" style="margin-bottom:20px">
+        <button class="lang-btn active" data-lang="chinese">中文</button>
+        <button class="lang-btn" data-lang="english">English</button>
+        <button class="lang-btn" data-lang="japanese">日本語</button>
+        <button class="lang-btn" data-lang="auto">自動偵測</button>
+      </div>
+
+      <div class="progress-wrap" id="progress-wrap">
+        <div class="progress-label" id="progress-label">載入模型中…</div>
+        <div class="progress-bar-bg"><div class="progress-bar" id="progress-bar"></div></div>
+      </div>
+
+      <button class="transcribe-btn" id="transcribe-btn" disabled>開始轉錄</button>
+
+      <div class="result-label">
+        <span>轉錄結果</span>
+        <span id="file-char-count" style="color:var(--text2);font-size:.8rem"></span>
+      </div>
+      <div class="result-box placeholder" id="file-result">選擇音訊檔案後按「開始轉錄」…</div>
+      <div class="action-row">
+        <button class="action-btn" id="file-copy">📋 複製</button>
+        <button class="action-btn" id="file-save">💾 儲存 .txt</button>
+        <button class="action-btn" id="file-clear">🗑 清除</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
