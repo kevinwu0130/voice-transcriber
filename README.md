@@ -27,7 +27,17 @@
 - 支援中文、English、日本語、自動偵測
 - 模型首次使用時下載，之後快取於瀏覽器，可離線使用
 
+## 平台支援
+
+| 功能 | macOS（Safari） | Windows / Linux（Chrome / Edge） |
+|------|:--------------:|:--------------------------------:|
+| 即時錄音 | ✅ Apple 語音引擎 | ✅ Google / Microsoft 語音引擎 |
+| 音訊檔案轉錄 | ✅ | ✅ |
+| 中文支援 | ✅ | ✅ |
+
 ## 開啟方式
+
+### macOS
 
 ```bash
 git clone https://github.com/kevinwu0130/voice-transcriber.git
@@ -36,17 +46,31 @@ npm install
 npm run dev
 ```
 
-瀏覽器開啟 **http://localhost:5173**
+用 **Safari** 開啟 http://localhost:5173（即時錄音效果最佳）
 
-> 建議使用 **Safari**（macOS）以獲得最佳 Web Speech API 支援。
+### Windows
+
+1. 安裝 [Node.js 18+](https://nodejs.org)（安裝時勾選「Add to PATH」）
+2. 開啟「命令提示字元」或「PowerShell」：
+
+```bat
+git clone https://github.com/kevinwu0130/voice-transcriber.git
+cd voice-transcriber
+npm install
+npm run dev
+```
+
+3. 用 **Chrome** 或 **Edge** 開啟 http://localhost:5173
+
+> Windows 即時錄音使用 Google（Chrome）或 Microsoft（Edge）語音引擎，中文辨識效果良好。
 
 ## 系統需求
 
 | 項目 | 需求 |
 |------|------|
-| 瀏覽器 | Safari 14+ / Chrome 90+（即時錄音）|
+| 瀏覽器 | macOS：Safari 14+　　Windows：Chrome 90+ / Edge 90+ |
 | Node.js | 18 或更新版本 |
-| 網路 | 首次下載 Whisper 模型時需要 |
+| 網路 | 首次下載 Whisper 模型時需要（~150–290 MB） |
 
 ## 專案結構
 
