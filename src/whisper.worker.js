@@ -34,13 +34,16 @@ self.addEventListener('message', async ({ data }) => {
 
   if (type === 'transcribe') {
     try {
-      const result = await transcriber(audio, {
-        language: language || 'chinese',
+      // language === null means auto-detect (don't pass language to Whisper)
+      const opts = {
         task: 'transcribe',
         chunk_length_s: 30,
         stride_length_s: 5,
         return_timestamps: true
-      })
+      }
+      if (language) opts.language = language
+
+      const result = await transcriber(audio, opts)
       self.postMessage({ type: 'result', text: result.text, chunks: result.chunks })
     } catch (err) {
       self.postMessage({ type: 'error', message: err.message })
